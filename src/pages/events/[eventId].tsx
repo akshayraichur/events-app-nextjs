@@ -1,13 +1,28 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { getEventById } from "../../../dummy-data";
+import EventSummary from "@/Components/EventDetail/EventSummary";
+import EventLogistics from "@/Components/EventDetail/EventLogistics";
+import EventContent from "@/Components/EventDetail/EventContent";
 
 const EventDetailPage = () => {
-  const { query } = useRouter();
+  const {
+    query: { eventId },
+  } = useRouter();
+
+  const event = getEventById(eventId);
+  if (!event) {
+    return <p>No event found!</p>;
+  }
+
   return (
-    <div>
-      <h1>Events Detail Page</h1>
-      <p>You have chosen : {query?.eventId}</p>
-    </div>
+    <>
+      <EventSummary title={event.title} />
+      <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title} />
+      <EventContent>
+        <p>{event.description}</p>
+      </EventContent>
+    </>
   );
 };
 
