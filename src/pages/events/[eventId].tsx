@@ -12,7 +12,7 @@ const EventDetailPage = () => {
 
   const event = getEventById(eventId);
   if (!event) {
-    return <p>No event found!</p>;
+    return <p className="center error-alert">No event found!</p>;
   }
 
   return (

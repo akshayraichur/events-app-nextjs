@@ -1,3 +1,22 @@
 body {
   font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  box-sizing: border-box;
+}
+
+.center {
+  text-align: center;
+}
+
+.error-alert {
+  padding: 2rem 1rem;
+  background-color: lightsalmon;
+  width: fit-content;
+  margin: 1rem auto;
+  border-radius: 10px;
 }

@@ -4,16 +4,25 @@ import classes from "./Button.module.css";
 
 type ButtonProps = {
   children: React.ReactNode;
-  link: string;
+  link: string | boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const Button = (props: ButtonProps) => {
-  const { children, link } = props;
-  return (
-    <Link href={link} id="link" className={classes.btn}>
-      {children}
-    </Link>
-  );
+  const { children, link, onClick } = props;
+  if (props.link) {
+    return (
+      <Link href={link as string} id="link" className={classes.btn}>
+        {children}
+      </Link>
+    );
+  } else {
+    return (
+      <button className={classes.btn} onClick={props.onClick}>
+        {children}
+      </button>
+    );
+  }
 };
 
 /* Next will recognise this a tag and replace its own a tag with this a tag and render it. 
