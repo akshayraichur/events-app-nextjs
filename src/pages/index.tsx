@@ -37,7 +37,8 @@ export async function getServerSideProps(ctx: GetServerSideProps) {
 }
 
 // Down sides of using getStaticProps
-// This page will only update if we build again. (if we do not use revalidate, if we use revalidate, then page will be built automatically after every x interval of seconds)
+// This page will only update if we build again. (if we do not use revalidate,
+// if we use revalidate, then page will be built automatically after every x interval of seconds)
 
 // export async function getStaticProps(ctx: GetStaticProps) {
 //   const response = await fetchData("https://react-firebase-auth-24251.firebaseio.com/events.json");
