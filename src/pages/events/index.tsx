@@ -3,7 +3,7 @@ import { getAllEvents } from "../../../dummy-data";
 import EventList from "@/Components/Events/EventList";
 import EventsSearch from "@/Components/Events/EventsSearch";
 import { useRouter } from "next/router";
-import { GetStaticPropsContext } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult, GetStaticPropsContext } from "next";
 import { fetchData } from "@/Utils/ApiCalls";
 import { EventType } from "../index";
 
@@ -25,16 +25,26 @@ const EventsPage = ({ events }: EventsPageProps) => {
   );
 };
 
-export async function getStaticProps(ctx: GetStaticPropsContext) {
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const response = await fetchData("https://react-firebase-auth-24251.firebaseio.com/events.json");
   let resultingData: Array<EventType> = Object.keys(response).map((key) => ({ id: key, ...response[key] }));
-
   return {
     props: {
       events: resultingData,
     },
-    revalidate: 10,
   };
 }
+
+// export async function getStaticProps(ctx: GetStaticPropsContext) {
+//   const response = await fetchData("https://react-firebase-auth-24251.firebaseio.com/events.json");
+//   let resultingData: Array<EventType> = Object.keys(response).map((key) => ({ id: key, ...response[key] }));
+
+//   return {
+//     props: {
+//       events: resultingData,
+//     },
+//     revalidate: 10,
+//   };
+// }
 
 export default EventsPage;
