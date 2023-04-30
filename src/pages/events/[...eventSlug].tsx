@@ -42,6 +42,14 @@ const FilteredEventPage = ({ events, hasError }: FilteredEventProps) => {
   );
 };
 
+/**
+ *
+ * This page is a good example of using client side data fetching, because, we might want to load the page as early as possible,
+ * and then maybe show a loading state while the data is being fetched.
+ * Ofcourse we would miss out of content being generated on the fly for SEO. but w.r.t performance, it would be nice to use client side data fetching here.
+ *
+ */
+
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const { params } = ctx;
   let filteredData = params?.eventSlug as string[];
