@@ -1,13 +1,39 @@
 import Head from "next/head";
 import { getFeaturedEvents } from "../../dummy-data";
 import EventList from "@/Components/Events/EventList";
+import { GetStaticProps } from "next";
+import { fetchData } from "@/Utils/ApiCalls";
 
-export default function Home() {
-  const featuredEvents = getFeaturedEvents();
+export interface EventType {
+  id: string;
+  date: string;
+  description: string;
+  image: string;
+  isFeatured: boolean;
+  location: string;
+  title: string;
+}
 
+type HomeProps = {
+  featuredEventsData: EventType[];
+};
+
+export default function Home({ featuredEventsData }: HomeProps) {
   return (
     <div>
-      <EventList items={featuredEvents} />
+      <EventList items={featuredEventsData} />
     </div>
   );
+}
+
+export async function getStaticProps(ctx: GetStaticProps) {
+  const response = await fetchData("https://react-firebase-auth-24251.firebaseio.com/events.json");
+  let resultingData: Array<EventType> = Object.keys(response).map((key) => ({ id: key, ...response[key] }));
+
+  return {
+    props: {
+      featuredEventsData: resultingData.filter((events) => events.isFeatured),
+      revalidate: 10,
+    },
+  };
 }
