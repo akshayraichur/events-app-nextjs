@@ -6,6 +6,7 @@ import Button from "@/Components/UI/Button";
 import { GetServerSidePropsContext } from "next";
 import { fetchData } from "@/Utils/ApiCalls";
 import { EventType } from "..";
+import Head from "next/head";
 
 type FilteredEventProps = {
   events: EventType[];
@@ -37,6 +38,9 @@ const FilteredEventPage = ({ events, hasError }: FilteredEventProps) => {
 
   return (
     <div>
+      <Head>
+        <title>Events App | Filtered Events</title>
+      </Head>
       <EventList items={events} />
     </div>
   );

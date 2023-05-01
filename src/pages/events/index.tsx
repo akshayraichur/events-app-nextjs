@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { GetServerSidePropsContext, GetServerSidePropsResult, GetStaticPropsContext } from "next";
 import { fetchData } from "@/Utils/ApiCalls";
 import { EventType } from "../index";
+import Head from "next/head";
 
 type EventsPageProps = {
   events: Array<EventType>;
@@ -19,6 +20,9 @@ const EventsPage = ({ events }: EventsPageProps) => {
   };
   return (
     <>
+      <Head>
+        <title>Events App | All Events</title>
+      </Head>
       <EventsSearch onSearch={findEventsHandler} />
       <EventList items={events} />
     </>

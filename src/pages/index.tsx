@@ -20,9 +20,14 @@ type HomeProps = {
 
 export default function Home({ featuredEventsData }: HomeProps) {
   return (
-    <div>
-      <EventList items={featuredEventsData} />
-    </div>
+    <>
+      <Head>
+        <title>Events App | Home</title>
+      </Head>
+      <div>
+        <EventList items={featuredEventsData} />
+      </div>
+    </>
   );
 }
 

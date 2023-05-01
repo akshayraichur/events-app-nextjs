@@ -7,6 +7,7 @@ import EventContent from "@/Components/EventDetail/EventContent";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { fetchData } from "@/Utils/ApiCalls";
 import { EventType } from "../index";
+import Head from "next/head";
 
 type EventDetailPageProps = {
   event: EventType;
@@ -24,6 +25,9 @@ const EventDetailPage = (props: EventDetailPageProps) => {
 
   return (
     <>
+      <Head>
+        <title>{event.title}</title>
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title} />
       <EventContent>
